@@ -7,6 +7,11 @@ func main() {
 	const confTickets = 50
 	var remainingTickets uint = 50
 
+	// bookings as an array
+	// var bookingsArray [50]string
+	// or as a slice
+	var bookingsSlice []string{}
+
 	fmt.Printf("Welcome to %v booking app\n", confName)
 	fmt.Println("We have a total of", confTickets, "tickets and", remainingTickets, "are still available")
 
@@ -29,6 +34,16 @@ func main() {
 	fmt.Scan(&userTickets)
 
 	remainingTickets = remainingTickets - userTickets
+	//bookingsArray[0] = firstName + " " + lastName
+
+	//fmt.Printf("The whole array: %v\n", bookingsArray)
+	//fmt.Printf("The first value: %v\n", bookingsArray[0])
+	//fmt.Printf("Array type: %T\n", bookingsArray)
+	//fmt.Printf("Array length: %v\n", len(bookingsArray))
+
+	bookingsSlice = append(bookingsSlice, firstName + " " + lastName)
+	fmt.Printf("The whole slice: %v\n", bookingsSlice)
+	fmt.Printf("The first value: %v\n", bookingsSlice[0])
 
 	fmt.Printf("Thanks %v %v for booking %v tickets.\nYou will receive a confirmation at %v.\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v.\n", remainingTickets, confName)
