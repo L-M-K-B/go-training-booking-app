@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"go-training-booking-app/helper"
 	"strings"
 )
 
@@ -18,7 +17,7 @@ func main() {
 	for {
 		// Book tickets
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			bookTickets(userTickets, firstName, lastName, email)
