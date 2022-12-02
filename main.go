@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 const confTickets = 50
 
 var confName = "Go Conference"
 var remainingTickets uint = 50
-var bookingsSlice []string
+var bookingsSlice = make([]map[string]string, 0) //=> 0 is the initial number of elements in the map, will be updated automatically by adding new elements
 
 func main() {
 	greetUsers()
@@ -49,11 +49,10 @@ func greetUsers() {
 	fmt.Println("We have a total of", confTickets, "tickets and", remainingTickets, "are still available")
 }
 
-func printFirstNames(bookingsSlice []string) {
+func printFirstNames(bookingsSlice []map[string]string) {
 	var firstNames []string
 	for _, singleBooking := range bookingsSlice {
-		var names = strings.Fields(singleBooking)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, singleBooking["firstName"])
 	}
 	//fmt.Printf("The first names of bookings are: %v\n", firstNames)
 	//fmt.Println("\n")
@@ -80,9 +79,17 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTickets(userTickets uint, firstName string, lastName string, email string) (uint, []string) {
+func bookTickets(userTickets uint, firstName string, lastName string, email string) (uint, []map[string]string) {
 	remainingTickets = remainingTickets - userTickets
-	bookingsSlice = append(bookingsSlice, firstName+" "+lastName)
+
+	// create a map for a user
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["ticketNumber"] = strconv.FormatUint(uint64(userTickets), 10)
+
+	bookingsSlice = append(bookingsSlice, userData)
 
 	fmt.Printf("Thanks %v %v for booking %v tickets.\nYou will receive a confirmation at %v.\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v.\n", remainingTickets, confName)
