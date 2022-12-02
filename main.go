@@ -68,17 +68,18 @@ func getUserInput() (string, string, string, uint) {
 	var email string
 	var userTickets uint
 
+	// ignore error handling for Scan
 	fmt.Println("Enter your first name:")
-	fmt.Scan(&firstName)
+	_, _ = fmt.Scan(&firstName)
 
 	fmt.Println("Enter your last name:")
-	fmt.Scan(&lastName)
+	_, _ = fmt.Scan(&lastName)
 
 	fmt.Println("Enter your email address:")
-	fmt.Scan(&email)
+	_, _ = fmt.Scan(&email)
 
 	fmt.Println("Enter the number of tickets:")
-	fmt.Scan(&userTickets)
+	_, _ = fmt.Scan(&userTickets)
 
 	return firstName, lastName, email, userTickets
 }
